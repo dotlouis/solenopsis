@@ -1,6 +1,14 @@
 {
   "name": "studloop",
+  "description": "Loopback(NodeJS) backend for studant",
+  "private": true,
   "version": "1.0.0",
+  "author": "Louis <louis@studant.fr>",
+  "homepage": "http://www.studant.fr",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/studant/studloop"
+  },
   "main": "server/server.js",
   "scripts": {
     "pretest": "jshint ."
@@ -19,10 +27,5 @@
   },
   "devDependencies": {
     "jshint": "^2.5.6"
-  },
-  "repository": {
-    "type": "",
-    "url": ""
-  },
-  "description": "studloop"
+  }
 }
