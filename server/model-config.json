@@ -7,9 +7,6 @@
       "./models"
     ]
   },
-  "User": {
-    "dataSource": "db"
-  },
   "AccessToken": {
     "dataSource": "db",
     "public": false
@@ -25,5 +22,21 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Event": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Feed": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Seeder": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Tag": {
+    "dataSource": "db",
+    "public": true
   }
 }

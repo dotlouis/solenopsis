@@ -1,0 +1,32 @@
+{
+  "name": "Feed",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "featured": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "seeder": {
+      "type": "belongsTo",
+      "model": "Seeder",
+      "foreignKey": ""
+    },
+    "tags": {
+      "type": "hasAndBelongsToMany",
+      "model": "Tag",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}
