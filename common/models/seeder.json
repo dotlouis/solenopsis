@@ -1,0 +1,29 @@
+{
+  "name": "Seeder",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "featured": {
+      "type": "boolean"
+    },
+    "type": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "feeds": {
+      "type": "hasMany",
+      "model": "Feed",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}
