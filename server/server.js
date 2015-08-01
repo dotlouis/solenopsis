@@ -1,25 +1,23 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var config = require('./config');
 
 var app = module.exports = loopback();
 
 app.start = function() {
 
   //  Set the environment variables we need.
-  app_ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-  app_port      = process.env.OPENSHIFT_NODEJS_PORT || 3005;
+  app_ipaddress = process.env.OPENSHIFT_NODEJS_IP || config.host;
+  app_port      = process.env.OPENSHIFT_NODEJS_PORT || config.port;
 
-  if (typeof app_ipaddress === "undefined") {
-      //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
-      //  allows us to run/test the app locally.
-      console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
-      app_ipaddress = "127.0.0.1";
-  };
+  console.log('CONFIG');
+  console.log('Host: ', app_ipaddress);
+  console.log('Port: ', app_port);
 
   // start the web server
   return app.listen(app_port, app_ipaddress, function() {
     app.emit('started');
-    console.log('Web server listening at: %s', app.get('url'));
+    // console.log('Web server listening at: %s', app.get('url'));
   });
 };
 
