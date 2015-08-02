@@ -19,11 +19,19 @@ module.exports = function enableAuthentication(server) {
       uri: '/facebook',
       // How you want to map the facebook profile on your model
       // The key is the facebook profile key and the value is your model key
+      // https://developers.facebook.com/docs/facebook-login/permissions/v2.4
       mapping: {
         id: 'facebookId',
         email: 'email',
+        name: 'name',
         first_name: 'firstName',
         last_name: 'lastName',
+        age_range: 'ageRange',
+        link: 'link',
+        locale: 'locale',
+        timezone: 'timezone',
+        updated_time: 'updatedTime',
+        verified: 'verified',
         gender: 'gender'
       }
     }
