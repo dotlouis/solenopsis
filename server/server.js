@@ -1,24 +1,17 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var ENV = require('./env');
+
+if(ENV.NODE_ENV == 'development')
+  var nomo = require('node-monkey').start();
 
 var app = module.exports = loopback();
 
 app.start = function() {
-
-  //  Set the environment variables we need.
-  app_ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-  app_port      = process.env.OPENSHIFT_NODEJS_PORT || 3005;
-
-  if (typeof app_ipaddress === "undefined") {
-      //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
-      //  allows us to run/test the app locally.
-      console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
-      app_ipaddress = "127.0.0.1";
-  };
-
   // start the web server
-  return app.listen(app_port, app_ipaddress, function() {
+  return app.listen(ENV.APP_PORT, ENV.APP_HOST, function() {
     app.emit('started');
+    //  Set the environment variables we need.
     console.log('Web server listening at: %s', app.get('url'));
   });
 };
