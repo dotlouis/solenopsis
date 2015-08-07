@@ -1,6 +1,7 @@
 {
   "name": "Feed",
   "base": "PersistedModel",
+  "strict": true,
   "idInjection": true,
   "options": {
     "validateUpsert": true
@@ -8,10 +9,13 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "comments": "the name of the feed"
     },
     "featured": {
-      "type": "boolean"
+      "type": "boolean",
+      "required": false,
+      "comments": "a featured feed is better promoted in search and suggestions"
     }
   },
   "validations": [],
@@ -19,6 +23,11 @@
     "seeder": {
       "type": "belongsTo",
       "model": "Seeder",
+      "foreignKey": ""
+    },
+    "events": {
+      "type": "hasMany",
+      "model": "Event",
       "foreignKey": ""
     },
     "tags": {
