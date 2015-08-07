@@ -1,18 +1,58 @@
 {
   "name": "Event",
   "base": "PersistedModel",
+  "strict": true,
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
+    "end": {
+      "type": "object",
+      "required": true,
+      "comments": "the end date, time and timezone of the event"
+    },
+    "location": {
+      "type": "object",
+      "comments": "the location of the event"
+    },
     "name": {
       "type": "string",
-      "required": true
+      "id": false,
+      "required": true,
+      "index": false,
+      "comments": "the name of the event"
+    },
+    "start": {
+      "type": "object",
+      "required": true,
+      "comments": "the start date, time and timezone of the event"
+    },
+    "recurrence": {
+      "type": [
+        "string"
+      ],
+      "comments": "the recurrence strings of the event. Following the RFC standard"
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "feed": {
+      "type": "belongsTo",
+      "model": "Feed",
+      "foreignKey": ""
+    },
+    "author": {
+      "type": "belongsTo",
+      "model": "Seeder",
+      "foreignKey": ""
+    },
+    "orignal": {
+      "type": "belongsTo",
+      "model": "Event",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": []
 }
