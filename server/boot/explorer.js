@@ -1,3 +1,8 @@
+var env = require('../env');
+
+if(env.NODE_ENV !== 'development')
+  return;
+
 module.exports = function mountLoopBackExplorer(server) {
   var explorer;
   try {
