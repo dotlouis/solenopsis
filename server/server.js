@@ -1,8 +1,9 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 var ENV = require('./env');
+var argv = require('minimist')(process.argv.slice(2));
 
-if(ENV.NODE_ENV == 'development')
+if(argv.debug || argv.d)
   var nomo = require('node-monkey').start();
 
 var app = module.exports = loopback();
