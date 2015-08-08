@@ -8,35 +8,35 @@
     ]
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": false
   },
   "Event": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": true
   },
   "Feed": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": true
   },
   "Seeder": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": true
   },
   "Tag": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": true
   }
 }
