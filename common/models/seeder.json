@@ -1,19 +1,41 @@
 {
   "name": "Seeder",
   "base": "User",
+  "strict": true,
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
-      "type": "string"
+    "devices": {
+      "type": [
+        "object"
+      ],
+      "comments": "the devices registered for this account. Used for push notifications"
     },
     "featured": {
-      "type": "boolean"
+      "type": "boolean",
+      "comments": "a featured seeder is better promoted in search and suggestions"
+    },
+    "firstName": {
+      "type": "string",
+      "comments": "the first name of the seeder"
+    },
+    "lastName": {
+      "type": "string",
+      "comments": "the last name of the seeder"
+    },
+    "name": {
+      "type": "string",
+      "comments": "the name (firstname + lastname) of the seeder"
+    },
+    "settings": {
+      "type": "object",
+      "comments": "the seeder' settings and preferences"
     },
     "type": {
-      "type": "string"
+      "type": "string",
+      "comments": "a string specifying the nature of the seeder (USER, UNIVERSITY...)"
     }
   },
   "validations": [],
@@ -21,6 +43,11 @@
     "feeds": {
       "type": "hasMany",
       "model": "Feed",
+      "foreignKey": ""
+    },
+    "tags": {
+      "type": "hasMany",
+      "model": "Tag",
       "foreignKey": ""
     }
   },

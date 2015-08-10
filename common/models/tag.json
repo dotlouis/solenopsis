@@ -8,11 +8,13 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "comments": "the name of the tag"
     },
     "type": {
       "type": "string",
-      "required": true
+      "required": true,
+      "comments": "a string specifying the nature of the tag (LOCATION, GRADE...)"
     }
   },
   "validations": [],
