@@ -17,12 +17,19 @@ function grantUserAdmin(cb){
     if(!seeder)
       cb(ADMIN_EMAIL + " does not match any user");
 
-    server.models.Seeder.makeAdmin(seeder.id, function(err){
-      if(err) cb(err);
-      console.log(ADMIN_EMAIL + " has been granted admin privileges");
-      console.log("Be careful, With great power comes great responsibility");
-      cb();
-    });
+    if(!argv.revoke && !argv.r)
+      server.models.Seeder.grantAdmin(seeder.id, function(err){
+        if(err) cb(err);
+        console.log(ADMIN_EMAIL + " has been granted admin privileges");
+        console.log("Be careful, With great power comes great responsibility");
+        cb();
+      });
+    else
+      server.models.Seeder.revokeAdmin(seeder.id, function(err){
+        if(err) cb(err);
+        console.log(ADMIN_EMAIL + " has been removed admin privileges");
+        cb();
+      });
 
   });
 }
