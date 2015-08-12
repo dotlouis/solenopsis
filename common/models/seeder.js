@@ -10,7 +10,7 @@ module.exports = function(Seeder) {
   // });
 
 
-  Seeder.makeAdmin = function(userId, cb){
+  Seeder.grantAdmin = function(userId, cb){
     var Role = Seeder.app.models.Role;
     var RoleMapping = Seeder.app.models.RoleMapping;
 
@@ -32,6 +32,27 @@ module.exports = function(Seeder) {
         });
 
       });
+  };
+
+  Seeder.revokeAdmin = function(userId, cb){
+    var Role = Seeder.app.models.Role;
+    var RoleMapping = Seeder.app.models.RoleMapping;
+
+    Role.findOne({where: {
+      name: 'admin'
+    }}, function(err, role){
+      if(err) cb(err);
+      if(!role) cb("Admin role does not exist");
+
+      RoleMapping.destroyAll({
+        roleId: role.id,
+        principalId: userId
+      }, function(err, info){
+        if(err) cb(err);
+        if(info.count === 0) cb("User not mapped to admin role");
+        cb()
+      });
+    });
   };
 
 };

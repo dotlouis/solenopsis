@@ -50,6 +50,7 @@ node server/server.js
 If for some reasons you want to grant admin privilege to a user, you can do so by running this script:
 ```bash
 node server/setup-admin.js -u email@example.com
+# To revoke admin privileges add the option -r
 ```
 
 This user will be granted access to all CRUD operations and remote method execution. This is useful to test the api and manage data remotely.
