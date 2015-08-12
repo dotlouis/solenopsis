@@ -2,7 +2,7 @@
 
 [LoopBack](http://loopback.io) backend for studant.
 
-## Installation
+### Installation
 
 ```bash
 npm install
@@ -45,8 +45,17 @@ Launch the app
 node server/server.js
 # use --debug or -d to debug the app at localhost:50500
 ```
+### Admin User
 
-## Deploy
+If for some reasons you want to grant admin privilege to a user, you can do so by running this script:
+```bash
+node server/setup-admin.js -u email@example.com
+```
+
+This user will be granted access to all CRUD operations and remote method execution. This is useful to test the api and manage data remotely.
+See [loopback-browser](https://github.com/dot-louis/loopback-browser).
+
+### Deploy
 
 The `openshift` branch is used for deploying only.
 http://stackoverflow.com/questions/12657168/can-i-use-my-existing-git-repo-with-openshift
