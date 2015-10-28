@@ -7,16 +7,6 @@
     "validateUpsert": true
   },
   "properties": {
-    "devices": {
-      "type": [
-        "object"
-      ],
-      "comments": "the devices registered for this account. Used for push notifications"
-    },
-    "featured": {
-      "type": "boolean",
-      "comments": "a featured seeder is better promoted in search and suggestions"
-    },
     "firstName": {
       "type": "string",
       "comments": "the first name of the seeder"
@@ -28,36 +18,33 @@
     "name": {
       "type": "string",
       "comments": "the name (firstname + lastname) of the seeder"
-    },
-    "settings": {
-      "type": "object",
-      "comments": "the seeder' settings and preferences"
-    },
-    "type": {
-      "type": "string",
-      "comments": "a string specifying the nature of the seeder (USER, UNIVERSITY...)"
     }
   },
   "validations": [],
   "relations": {
-    "feeds": {
+    "events": {
       "type": "hasMany",
-      "model": "Feed",
-      "foreignKey": ""
-    },
-    "tags": {
-      "type": "hasMany",
-      "model": "Tag",
+      "model": "Event",
       "foreignKey": ""
     }
   },
   "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "facebook"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
     },
     {
       "accessType": "*",
