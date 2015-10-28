@@ -3,7 +3,7 @@
   "description": "Loopback(NodeJS) backend for studant",
   "private": true,
   "version": "1.0.0",
-  "author": "Louis <louis@studant.fr>",
+  "author": "Louis <louis@studant.co>",
   "homepage": "http://www.studant.fr",
   "repository": {
     "type": "git",
