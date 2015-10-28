@@ -7,49 +7,22 @@
     "validateUpsert": true
   },
   "properties": {
-    "end": {
-      "type": "object",
-      "required": true,
-      "comments": "the end date, time and timezone of the event"
-    },
-    "location": {
-      "type": "object",
-      "comments": "the location of the event"
-    },
-    "name": {
+    "title": {
       "type": "string",
-      "id": false,
       "required": true,
-      "index": false,
-      "comments": "the name of the event"
+      "comments": "the title of the event"
     },
-    "start": {
-      "type": "object",
-      "required": true,
-      "comments": "the start date, time and timezone of the event"
-    },
-    "recurrence": {
-      "type": [
-        "string"
-      ],
-      "comments": "the recurrence strings of the event. Following the RFC standard"
+    "body": {
+      "type": "string",
+      "required": false,
+      "comments": "the description and details of the event"
     }
   },
   "validations": [],
   "relations": {
-    "feed": {
-      "type": "belongsTo",
-      "model": "Feed",
-      "foreignKey": ""
-    },
-    "author": {
+    "seeder": {
       "type": "belongsTo",
       "model": "Seeder",
-      "foreignKey": ""
-    },
-    "orignal": {
-      "type": "belongsTo",
-      "model": "Event",
       "foreignKey": ""
     }
   },
@@ -58,6 +31,11 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
     },
     {
       "accessType": "*",

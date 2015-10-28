@@ -8,35 +8,27 @@
     ]
   },
   "AccessToken": {
-    "dataSource": "postgres",
+    "dataSource": "memory",
     "public": false
   },
   "ACL": {
-    "dataSource": "postgres",
+    "dataSource": "memory",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "postgres",
+    "dataSource": "memory",
     "public": false
   },
   "Role": {
-    "dataSource": "postgres",
+    "dataSource": "memory",
     "public": false
   },
   "Event": {
-    "dataSource": "postgres",
-    "public": true
-  },
-  "Feed": {
-    "dataSource": "postgres",
+    "dataSource": "memory",
     "public": true
   },
   "Seeder": {
-    "dataSource": "postgres",
-    "public": true
-  },
-  "Tag": {
-    "dataSource": "postgres",
+    "dataSource": "memory",
     "public": true
   }
 }
