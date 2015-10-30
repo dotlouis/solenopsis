@@ -25,7 +25,11 @@
     "events": {
       "type": "hasMany",
       "model": "Event",
-      "foreignKey": ""
+      "foreignKey": "ownerId"
+    },
+    "following": {
+      "type": "hasAndBelongsToMany",
+      "model": "Event"
     }
   },
   "acls": [
@@ -40,6 +44,20 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "facebook"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "newEvent"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "status"
     },
     {
       "principalType": "ROLE",

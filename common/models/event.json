@@ -20,10 +20,14 @@
   },
   "validations": [],
   "relations": {
-    "seeder": {
+    "owner": {
       "type": "belongsTo",
       "model": "Seeder",
-      "foreignKey": ""
+      "foreignKey": "ownerId"
+    },
+    "followers": {
+      "type": "hasAndBelongsToMany",
+      "model": "Seeder"
     }
   },
   "acls": [
