@@ -45,20 +45,89 @@ module.exports = function(Seeder) {
     });
   };
 
-  Seeder.prototype.newEvent = function(eventData, cb){
-    var Event = Seeder.app.models.Event;
+  Seeder.prototype.follow = function(eventId, cb){
     var self = this;
+    var Event = Seeder.app.models.Event;
 
-    self.events.create(eventData, function(err, event){
+    Event.findById(eventId, function(err, event){
       if(err) cb(err);
       self.following.add(event, function(err2){
         if(err2) cb(err2);
+        event.followersCount++;
+        event.save();
+        cb();
+      });
+    });
+  };
+  Seeder.remoteMethod('follow',{
+    http: {verb:'post'},
+    isStatic: false,
+    description: 'Follow a event',
+    accepts: {
+      arg: 'eventId',
+      type: 'number',
+      required: true
+    }
+  });
+
+
+  Seeder.prototype.unfollow = function(eventId, cb){
+    var self = this;
+    var Event = Seeder.app.models.Event;
+
+    Event.findById(eventId, function(err, event){
+      if(err) cb(err);
+      self.following.remove(event, function(err2){
+        if(err2) cb(err2);
+        event.followersCount--;
+        event.save();
+        cb();
+      });
+    });
+  };
+  Seeder.remoteMethod('unfollow',{
+    http: {verb:'post'},
+    isStatic: false,
+    description: 'Unfollow a event',
+    accepts: {
+      arg: 'eventId',
+      type: 'number',
+      required: true
+    }
+  });
+
+
+  Seeder.prototype.getFollowing = function(cb){
+    var self = this;
+    self.following({
+      filter:{limit:10}
+    }, function(err, events){
+      cb(null,events);
+    });
+  };
+  Seeder.remoteMethod('getFollowing',{
+    http: {verb:'get'},
+    isStatic: false,
+    description: 'Get the events the user is following',
+    returns: {arg: 'events', type: 'array'}
+  });
+
+
+  Seeder.prototype.newEvent = function(eventData, cb){
+    var self = this;
+
+    if(eventData.hasOwnProperty('followersCount')){
+      delete eventData.followersCount;
+    }
+
+    self.events.create(eventData, function(err, event){
+      if(err) cb(err);
+      self.follow(event.id, function(){
+        event.followersCount = 1;
         cb(null, event);
       });
     });
-
   };
-
   Seeder.remoteMethod('newEvent',{
     http: {verb:'post'},
     isStatic: false,
@@ -71,4 +140,5 @@ module.exports = function(Seeder) {
     },
     returns: {arg: 'event', type: 'object'}
   });
+
 };
