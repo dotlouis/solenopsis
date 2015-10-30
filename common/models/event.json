@@ -14,8 +14,12 @@
     },
     "body": {
       "type": "string",
-      "required": false,
       "comments": "the description and details of the event"
+    },
+    "followersCount": {
+      "type": "number",
+      "default": 0,
+      "comments": "the number of followers"
     }
   },
   "validations": [],
@@ -40,6 +44,13 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "permission": "DENY",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "property": ["followersCount"]
     },
     {
       "accessType": "*",
