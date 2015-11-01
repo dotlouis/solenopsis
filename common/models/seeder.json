@@ -4,7 +4,7 @@
   "strict": true,
   "idInjection": true,
   "options": {
-    "validateUpsert": true
+    "validateUpsert": false
   },
   "properties": {
     "firstName": {
@@ -19,6 +19,9 @@
       "type": "string",
       "comments": "the name (firstname + lastname) of the seeder"
     }
+  },
+  "mixins": {
+    "TimeStamp" : true
   },
   "validations": [],
   "relations": {
