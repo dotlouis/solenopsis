@@ -4,7 +4,7 @@
   "strict": true,
   "idInjection": true,
   "options": {
-    "validateUpsert": true
+    "validateUpsert": false
   },
   "properties": {
     "title": {
@@ -21,6 +21,9 @@
       "default": 0,
       "comments": "the number of followers"
     }
+  },
+  "mixins": {
+    "TimeStamp" : true
   },
   "validations": [],
   "relations": {
