@@ -26,7 +26,30 @@ module.exports = function(Event) {
     }
     next();
   });
+
+  Event.esSearch = function(queryString, cb){
+    esSearch(queryString, function(err, results){
+      if(err) cb(err);
+
+      var events = results.hits.hits.map(function(event){
+        return esFilter(event);
+      });
+      cb(null, events);
+    });
+  };
+  Event.remoteMethod('esSearch',{
+    http: {verb:'get'},
+    description: 'Search for events using elasticsearch',
+    accepts: {
+      arg: 'queryString',
+      type: 'string',
+      required: true
+    },
+    returns: {arg: 'events', type: 'array'}
+  });
+
 };
+
 function index(event){
   esClient.index({
     index: 'lasius',
@@ -40,4 +63,26 @@ function index(event){
     },
     refresh: true
   });
+}
+
+function esSearch(queryString, cb){
+  esClient.search({
+    index: 'lasius',
+    type: 'event',
+    size: 30,
+    body: {
+      'query': {
+        'match': {
+          '_all': queryString
+        }
+      }
+    }
+  }, cb);
+}
+
+function esFilter(event){
+  var filteredEvent = event._source;
+  filteredEvent.id = event._id;
+  filteredEvent._score = event._score;
+  return filteredEvent;
 }
