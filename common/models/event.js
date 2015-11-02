@@ -1,4 +1,5 @@
 var esClient = require('../../server/boot/elastic').esClient;
+var _ = require('lodash');
 
 module.exports = function(Event) {
 
@@ -6,7 +7,9 @@ module.exports = function(Event) {
     //single instance updated
     if(ctx.instance){
       // console.log(ctx.instance);
-      index(ctx.instance.__data);
+      var event = ctx.instance.__data;
+      event = extractHashTags(event);
+      index(event);
       // if(ctx.isNewInstance)
       //   console.log('created');
       // else
@@ -22,6 +25,14 @@ module.exports = function(Event) {
   });
 
   Event.esSearch = function(queryString, cb){
+    if(!queryString)
+      cb();
+
+    queryString = _.trim(queryString);
+
+    if(queryString.length===0)
+      cb();
+
     esSearch(queryString, function(err, results){
       if(err) cb(err);
 
@@ -44,6 +55,15 @@ module.exports = function(Event) {
 
 };
 
+function extractHashTags(event){
+  // http://stackoverflow.com/questions/21421526/javascript-jquery-parse-hashtags-in-a-string-using-regex-except-for-anchors-i
+  var hashtags = /(#[a-z\d-]+)/gi;
+  var extractedTags = event.body.match(hashtags);
+  if(extractedTags)
+    event.tags = extractedTags;
+  return event;
+}
+
 function index(event){
   esClient.index({
     index: 'lasius',
@@ -54,6 +74,9 @@ function index(event){
       body: event.body,
       tags: event.tags,
       followersCount: event.followersCount,
+      // start: event.start,
+      // end: event.end,
+      // rruleString: event.rrule.toText(),
       createdAt:  event.createdAt,
       updatedAt: event.updatedAt
     },
