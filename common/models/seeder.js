@@ -120,6 +120,8 @@ module.exports = function(Seeder) {
       delete eventData.followersCount;
     }
 
+    // try not to create (persist) then add following (persist again)
+    // and do it on a single call.
     self.events.create(eventData, function(err, event){
       if(err) cb(err);
       self.follow(event.id, function(){
