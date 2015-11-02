@@ -1,0 +1,41 @@
+{
+  "mappings": {
+    "event": {
+      "properties": {
+        "body": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "date",
+          "format": "dateOptionalTime"
+        },
+        "end": {
+          "type": "date",
+          "format": "dateOptionalTime"
+        },
+        "followersCount": {
+          "type": "long",
+          "include_in_all": false
+        },
+        "tags":{
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "rruleText": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "start": {
+          "type": "date",
+          "format": "dateOptionalTime"
+        },
+        "updatedAt": {
+          "type": "date",
+          "format": "dateOptionalTime"
+        }
+      }
+    }
+  }
+}
