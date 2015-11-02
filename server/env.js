@@ -3,7 +3,8 @@ var config = require('./config');
 module.exports = {
   // NODE
   // 'production' by default for security reasons
-  // setting NODE_ENV to 'production' disable loopback-explorer and stacktraces in JSON responses
+  // setting NODE_ENV to 'production' disable loopback-explorer
+  // and stacktraces in JSON responses
   // http://docs.strongloop.com/display/public/LB/Environment-specific+configuration#Environment-specificconfiguration-Turningoffstacktraces
   NODE_ENV: process.env.NODE_ENV || 'production',
 
@@ -20,5 +21,10 @@ module.exports = {
   PG_PORT: process.env.OPENSHIFT_POSTGRESQL_DB_PORT || 5432,
   PG_USERNAME: process.env.OPENSHIFT_POSTGRESQL_DB_USERNAME,
   PG_PASSWORD: process.env.OPENSHIFT_POSTGRESQL_DB_PASSWORD,
-  PG_DATABASE: process.env.PGDATABASE
+  PG_DATABASE: process.env.PGDATABASE,
+
+  // ELASTICSEARCH
+  ES_HOST: process.env.ES_HOST || 'localhost',
+  ES_PORT: process.env.ES_PORT || '9200',
+  ES_API_VERSION: process.env.ES_API_VERSION || '1.7'
 };
