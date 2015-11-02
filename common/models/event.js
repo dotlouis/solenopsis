@@ -1,10 +1,4 @@
-var elasticsearch = require('elasticsearch');
-
-var esClient = new elasticsearch.Client({
-  host: 'localhost:9200',
-  apiVersion: '1.7',
-  log: 'trace'
-});
+var esClient = require('../../server/boot/elastic').esClient;
 
 module.exports = function(Event) {
 
@@ -58,6 +52,8 @@ function index(event){
     body: {
       title: event.title,
       body: event.body,
+      tags: event.tags,
+      followersCount: event.followersCount,
       createdAt:  event.createdAt,
       updatedAt: event.updatedAt
     },
