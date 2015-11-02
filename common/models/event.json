@@ -56,6 +56,13 @@
       "property": ["followersCount"]
     },
     {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": ["esSearch"]
+    },
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "admin",
