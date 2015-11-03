@@ -24,6 +24,19 @@
     "tags": {
       "type": ["string"],
       "comments": "the hashtags extracted from the body"
+    },
+    "start": {
+      "required": true,
+      "type": "date",
+      "comments": "the starting date and time"
+    },
+    "end": {
+      "type": "date",
+      "comments": "the ending date and time"
+    },
+    "rrule": {
+      "type": "string",
+      "comments": "the recurrence rule as defined in the iCalendar RFC"
     }
   },
   "mixins": {
