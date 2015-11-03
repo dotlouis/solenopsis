@@ -3,23 +3,18 @@ var _ = require('lodash');
 
 module.exports = function(Event) {
 
-  Event.observe('after save', function(ctx, next) {
-    //single instance updated
+  Event.observe('before save', function(ctx, next) {
     if(ctx.instance){
-      // console.log(ctx.instance);
       var event = ctx.instance.__data;
-      event = extractHashTags(event);
-      index(event);
-      // if(ctx.isNewInstance)
-      //   console.log('created');
-      // else
-      //   console.log('updated');
+      event.tags = extractHashTags(event);
     }
-    // multiple instances updated
-    else{
-      // console.log('Updated %s matching %j',
-      // ctx.Model.pluralModelName,
-      // ctx.where);
+    next();
+  });
+
+  Event.observe('after save', function(ctx, next) {
+    if(ctx.instance){
+      var event = ctx.instance.__data;
+      index(event);
     }
     next();
   });
@@ -58,10 +53,12 @@ module.exports = function(Event) {
 function extractHashTags(event){
   // http://stackoverflow.com/questions/21421526/javascript-jquery-parse-hashtags-in-a-string-using-regex-except-for-anchors-i
   var hashtags = /(#[a-z\d-]+)/gi;
-  var extractedTags = event.body.match(hashtags);
+  var extractedTags;
+  if(event.body)
+    extractedTags = event.body.match(hashtags);
+
   if(extractedTags)
-    event.tags = extractedTags;
-  return event;
+    return extractedTags;
 }
 
 function index(event){

@@ -8,18 +8,22 @@
   },
   "properties": {
     "title": {
-      "type": "string",
       "required": true,
-      "comments": "the title of the event"
+      "type": "string",
+      "comments": "the title"
     },
     "body": {
       "type": "string",
-      "comments": "the description and details of the event"
+      "comments": "the description and details"
     },
     "followersCount": {
       "type": "number",
       "default": 0,
       "comments": "the number of followers"
+    },
+    "tags": {
+      "type": ["string"],
+      "comments": "the hashtags extracted from the body"
     }
   },
   "mixins": {
@@ -47,13 +51,6 @@
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW"
-    },
-    {
-      "accessType": "WRITE",
-      "permission": "DENY",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "property": ["followersCount"]
     },
     {
       "accessType": "EXECUTE",
