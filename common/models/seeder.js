@@ -119,6 +119,9 @@ module.exports = function(Seeder) {
     if(eventData.hasOwnProperty('followersCount')){
       delete eventData.followersCount;
     }
+    if(eventData.hasOwnProperty('tags')){
+      delete eventData.tags;
+    }
 
     // try not to create (persist) then add following (persist again)
     // and do it on a single call.
