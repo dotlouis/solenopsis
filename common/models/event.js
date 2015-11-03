@@ -1,5 +1,6 @@
 var esClient = require('../../server/boot/elastic').esClient;
 var _ = require('lodash');
+var RRule = require('rrule').RRule;
 
 module.exports = function(Event) {
 
@@ -71,9 +72,9 @@ function index(event){
       body: event.body,
       tags: event.tags,
       followersCount: event.followersCount,
-      // start: event.start,
-      // end: event.end,
-      // rruleString: event.rrule.toText(),
+      start: event.start,
+      end: event.end,
+      rruleText: RRule.fromString(event.rrule).toText(),
       createdAt:  event.createdAt,
       updatedAt: event.updatedAt
     },
