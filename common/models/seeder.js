@@ -116,6 +116,7 @@ module.exports = function(Seeder) {
   Seeder.prototype.newEvent = function(eventData, cb){
     var self = this;
 
+    // computed properties, can't be set by the client
     if(eventData.hasOwnProperty('followersCount')){
       delete eventData.followersCount;
     }
