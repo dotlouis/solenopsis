@@ -25,6 +25,10 @@
       "type": ["string"],
       "comments": "the hashtags extracted from the body"
     },
+    "speaker": {
+      "type": "string",
+      "comments": "the speaker at the event"
+    },
     "start": {
       "required": true,
       "type": "date",
@@ -33,6 +37,10 @@
     "end": {
       "type": "date",
       "comments": "the ending date and time"
+    },
+    "room": {
+      "type": "string",
+      "comments": "the room of the event"
     },
     "rrule": {
       "type": "string",

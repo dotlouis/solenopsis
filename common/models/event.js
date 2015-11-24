@@ -74,6 +74,8 @@ function index(event){
       followersCount: event.followersCount,
       start: event.start,
       end: event.end,
+      speaker: event.speaker,
+      room: event.room,
       rruleText: RRule.fromString(event.rrule).toText(),
       createdAt:  event.createdAt,
       updatedAt: event.updatedAt

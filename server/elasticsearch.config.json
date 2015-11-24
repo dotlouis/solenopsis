@@ -23,7 +23,13 @@
           "type": "string",
           "index": "not_analyzed"
         },
+        "room": {
+          "type": "string"
+        },
         "rruleText": {
+          "type": "string"
+        },
+        "speaker": {
           "type": "string"
         },
         "title": {
