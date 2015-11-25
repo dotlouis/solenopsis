@@ -89,7 +89,14 @@
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW",
-      "property": ["follow","unfollow","newEvent","getFollowing"]
+      "property": [
+        "follow",
+        "unfollow",
+        "newEvent",
+        "getFollowing",
+        "getProfile",
+        "__count__following"
+      ]
     },
     {
       "accessType": "*",

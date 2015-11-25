@@ -1,5 +1,20 @@
 module.exports = function(Seeder) {
 
+  Seeder.observe('before save', function(ctx, next) {
+    if(ctx.instance){
+      var seeder = ctx.instance.__data;
+      seeder.profilePic = updateProfilePic(seeder);
+    }
+    next();
+  });
+
+  function updateProfilePic(seeder){
+    if(seeder.fbId)
+      return 'https://graph.facebook.com/'+seeder.fbId+'/picture?type=large';
+    else
+      return;
+  }
+
   Seeder.grantAdmin = function(userId, cb){
     var Role = Seeder.app.models.Role;
     var RoleMapping = Seeder.app.models.RoleMapping;
@@ -96,13 +111,32 @@ module.exports = function(Seeder) {
     }
   });
 
+  Seeder.prototype.getProfile = function(cb){
+    var self = this;
+    var profile = {};
+    self.__count__following(function(err, followingCount){
+      if(err) cb(err);
+      profile.followingCount = followingCount;
+      self.__count__events(function(err, createdCount){
+        if(err) cb(err);
+        profile.createdCount = createdCount;
+        cb(null, profile);
+      });
+    });
+  };
+  Seeder.remoteMethod('getProfile',{
+    http: {verb:'get'},
+    isStatic: false,
+    description: 'Get the profile of the user (following, created, etc.)',
+    returns: {arg: 'profile', type: 'object'}
+  });
 
   Seeder.prototype.getFollowing = function(cb){
     var self = this;
     self.following({
       filter:{limit:10}
     }, function(err, events){
-      cb(null,events);
+      cb(null, events);
     });
   };
   Seeder.remoteMethod('getFollowing',{
