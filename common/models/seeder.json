@@ -18,6 +18,42 @@
     "name": {
       "type": "string",
       "comments": "the name (firstname + lastname) of the seeder"
+    },
+    "profilePic": {
+      "type": "string",
+      "comments": "the url of the seeder's profile picture"
+    },
+    "ageRange": {
+      "type": "object",
+      "comments": "the age range of the seeder"
+    },
+    "locale": {
+      "type": "string",
+      "comments": "the locale (country language) of the seeder"
+    },
+    "gender": {
+      "type": "string",
+      "comments": "the gender of the seeder"
+    },
+    "timezone": {
+      "type": "number",
+      "comments": "the timezone of the seeder"
+    },
+    "fbId": {
+      "type": "string",
+      "comments": "the facebookId of the seeder"
+    },
+    "fbLink": {
+      "type": "string",
+      "comments": "the link to the facebook profile of the seeder"
+    },
+    "fbVerified": {
+      "type": "boolean",
+      "comments": "if the user id verified on Facebook of the seeder"
+    },
+    "fbUpdatedTime": {
+      "type": "string",
+      "comments": "the last time the seeder was updated on Facebook"
     }
   },
   "mixins": {

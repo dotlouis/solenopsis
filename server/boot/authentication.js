@@ -21,17 +21,17 @@ module.exports = function enableAuthentication(server) {
       // The key is the facebook profile key and the value is your model key
       // https://developers.facebook.com/docs/facebook-login/permissions/v2.4
       mapping: {
-        id: 'facebookId',
+        id: 'fbId',
         email: 'email',
         name: 'name',
         first_name: 'firstName',
         last_name: 'lastName',
         age_range: 'ageRange',
-        link: 'link',
+        link: 'fbLink',
         locale: 'locale',
         timezone: 'timezone',
-        updated_time: 'updatedTime',
-        verified: 'verified',
+        updated_time: 'fbUpdatedTime',
+        verified: 'fbVerified',
         gender: 'gender'
       }
     }
