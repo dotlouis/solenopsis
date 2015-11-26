@@ -1,3 +1,5 @@
+var Calendar = require('../../server/cal-util').Calendar;
+
 module.exports = function(Seeder) {
 
   Seeder.observe('before save', function(ctx, next) {
@@ -136,6 +138,7 @@ module.exports = function(Seeder) {
     self.following({
       filter:{limit:10}
     }, function(err, events){
+      if(err) cb(err);
       cb(null, events);
     });
   };
@@ -144,6 +147,37 @@ module.exports = function(Seeder) {
     isStatic: false,
     description: 'Get the events the user is following',
     returns: {arg: 'events', type: 'array'}
+  });
+
+  Seeder.prototype.getCalendar = function(options, cb){
+    var self = this;
+
+    options = options || {};
+    this.mode = options.mode === 'flat' ? options.mode : 'nested';
+    this.daysCount = typeof options.daysCount === 'number' ? options.daysCount : 30;
+    this.offset = typeof options.offset === 'number' ? options.offset : 0;
+
+    self.following(function(err, events){
+      if(err) cb(err);
+      var cal = new Calendar(events)
+        .generate({
+          mode: self.mode,
+          daysCount: self.daysCount,
+          offset: self.offset
+        });
+      cb(null, cal);
+    });
+  };
+  Seeder.remoteMethod('getCalendar',{
+    http: {verb:'post'},
+    accepts: {
+      arg: 'options',
+      type: 'object',
+      http:{source:'body'}
+    },
+    isStatic: false,
+    description: 'Get the calendar of the user (structure + content)',
+    returns: {arg: 'calendar', type: 'object'}
   });
 
 
