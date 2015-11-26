@@ -95,6 +95,7 @@
         "newEvent",
         "getFollowing",
         "getProfile",
+        "getCalendar",
         "__count__following"
       ]
     },
