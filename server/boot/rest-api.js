@@ -1,4 +1,11 @@
+var ENV = require('../env');
+
 module.exports = function mountRestApi(server) {
-  var restApiRoot = server.get('restApiRoot');
-  server.use(restApiRoot, server.loopback.rest());
+  server.use(ENV.API_ROOT, server.loopback.rest());
+  server.once('started', function(){
+    console.log('API available at: %s%s',
+      server.get('url').replace(/\/$/, ''),
+      ENV.API_ROOT
+    );
+  });
 };

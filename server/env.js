@@ -1,4 +1,8 @@
 var config = require('./config');
+var pkg = require('../package.json');
+
+
+var version = pkg.version.split('.').shift();
 
 module.exports = {
   // NODE
@@ -11,6 +15,9 @@ module.exports = {
   // APP
   APP_HOST: process.env.OPENSHIFT_NODEJS_IP || config.host,
   APP_PORT: process.env.OPENSHIFT_NODEJS_PORT || config.port,
+
+  //API
+  API_ROOT: '/api' + (version > 0 ? '/v' + version : '') || config.restApiRoot,
 
   // FACEBOOK
   FB_APP_ID: process.env.FB_APP_ID,
