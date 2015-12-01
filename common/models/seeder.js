@@ -149,13 +149,12 @@ module.exports = function(Seeder) {
     returns: {arg: 'events', type: 'array'}
   });
 
-  Seeder.prototype.getCalendar = function(options, cb){
+  Seeder.prototype.getCalendar = function(mode, cb){
     var self = this;
 
-    options = options || {};
-    this.mode = options.mode === 'flat' ? options.mode : 'nested';
-    this.daysCount = typeof options.daysCount === 'number' ? options.daysCount : 30;
-    this.offset = typeof options.offset === 'number' ? options.offset : 0;
+    this.mode = mode === 'flat' ? mode : 'nested';
+    this.daysCount = 30;
+    this.offset = 0;
 
     self.following(function(err, events){
       if(err) cb(err);
@@ -169,11 +168,11 @@ module.exports = function(Seeder) {
     });
   };
   Seeder.remoteMethod('getCalendar',{
-    http: {verb:'post'},
+    http: {verb:'get'},
     accepts: {
-      arg: 'options',
-      type: 'object',
-      http:{source:'body'}
+      arg: 'mode',
+      type: 'string',
+      http:{source:'query'}
     },
     isStatic: false,
     description: 'Get the calendar of the user (structure + content)',
